@@ -1,10 +1,10 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "Send to message with notifier plugins after the run command",
    "author" : [
-      "taniwaki-makoto <taniwaki-makoto@kayac.com>"
+      "MACOPY <macopy123[at]gmail[dot]com >"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.4.3, CPAN::Meta::Converter version 2.130880",
+   "generated_by" : "Minilla/v0.4.3, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -42,6 +42,11 @@
       },
       "runtime" : {
          "requires" : {
+            "Getopt::Long" : "0",
+            "MIME::Lite" : "0",
+            "Module::Pluggable" : "0",
+            "Pod::Usage" : "0",
+            "Sys::Hostname" : "0",
             "perl" : "5.008005"
          }
       },
@@ -52,5 +57,20 @@
       }
    },
    "release_status" : "unstable",
-   "version" : "0.01"
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/mackee/App-Notifier/issues"
+      },
+      "homepage" : "https://github.com/mackee/App-Notifier",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/mackee/App-Notifier.git",
+         "web" : "https://github.com/mackee/App-Notifier"
+      }
+   },
+   "version" : "0.01",
+   "x_contributors" : [
+      "taniwaki-makoto <taniwaki-makoto@kayac.com>",
+      "mackee <macopy123@gmail.com>"
+   ]
 }
