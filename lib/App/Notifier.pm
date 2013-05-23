@@ -30,6 +30,7 @@ sub exec {
 
     my $command = join ' ', @{$self->{commands}};
     $self->{command_result} = `$command`;
+    print $self->{command_result};
     $self->{return_code} = $? >> 8;
 
 }
