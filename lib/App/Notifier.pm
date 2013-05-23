@@ -76,9 +76,9 @@ App::Notifier - Run some command and send to target with notifier plugins
 
 Connect <notif> and some options before a long-running command.
 
-    $ notif -P after_mail -t example@example.com benchmark.pl
+    $ notif -p Mail --mail_to example@example.com -- benchmark.pl
 
-This example is using App::Notifier::Plugin::After::Mail.
+This example is using App::Notifier::Plugin::Mail.
 This is sending mail to <example@example.com> after the command.
 
 =head1 DESCRIPTION
