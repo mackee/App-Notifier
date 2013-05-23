@@ -70,7 +70,7 @@ __END__
 
 =head1 NAME
 
-App::Notifier - Run some command and send to target with notifier plugins
+App::Notifier - Send to message with notifier plugins after the run command
 
 =head1 SYNOPSIS
 
