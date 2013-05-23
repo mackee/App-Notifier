@@ -5,4 +5,8 @@ on 'test' => sub {
 };
 
 requires 'Module::Pluggable';
+requires 'Getopt::Long';
+requires 'Pod::Usage';
+requires 'MIME::Lite';
+requires 'Sys::Hostname';
 

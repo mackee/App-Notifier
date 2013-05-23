@@ -5,36 +5,62 @@ use warnings;
 
 our $VERSION = "0.01";
 
-use Module::Pluggable;
+use Module::Pluggable
+    require => 1,
+    search_path => ['App::Notifier::Plugin'];
 
 sub new {
     my $class = shift;
     my %opt = @_;
 
     return bless {
-        opt => %opt
+        plugins => $opt{plugins},
+        argv => $opt{argv},
+        commands => [],
+        queue => [],
+        plugin_module_list => [],
+        commands => [],
+        return_code => 0,
+        command_result => '',
     }, $class;
 }
 
-sub opt { shift->{opt}; }
-
-sub exec_command {
+sub exec {
     my $self = shift;
-    my @commands = @_;
 
-    $self->setup;
+    my $command = join ' ', @{$self->{commands}};
+    $self->{command_result} = `$command`;
+    $self->{return_code} = $? >> 8;
 
-    system @commands;
-
-    $self->finish;
 }
 
 sub setup {
     my $self = shift;
+
+    my @commands;
+    for my $arg (reverse @{$self->{argv}}) {
+        last if '--' eq $arg;
+        unshift @commands, $arg;
+    }
+    $self->{commands} = [ @commands ];
+
+    for my $plugin_name ($self->plugins) {
+        my @module_splited_name = split /::/, $plugin_name;
+        my $plugin_suffix = $module_splited_name[-1];
+        if (grep { $plugin_suffix eq $_ } @{$self->{plugins}}) {
+            push @{$self->{plugin_module_list}}, $plugin_name;
+        }
+    }
+
 }
 
 sub finish {
     my $self = shift;
+    for my $plugin (@{$self->{plugin_module_list}}) {
+        if ($plugin->can('finish')) {
+            $plugin->finish($self);
+        }
+    }
 }
 
 1;
